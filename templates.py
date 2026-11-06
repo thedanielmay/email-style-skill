@@ -91,7 +91,46 @@ def personal():
     """Plain tier. Paragraphs only. Contact shortcuts (e.g. Leemo) override greeting and sign-off."""
     return "Plain", "Sunday lunch", wrap(lines(["Sunday lunch works for us.", "We will be there at 12:30.", "Leemo is bringing the cake."], 0), "Hi Mum,")
 
-ALL = [test_report, decision_request, client_update, question_list, short_reply, personal]
+def full_picture():
+    """Full picture formatting (counsel brief sample). The whole picture in one email: short answer first, proof in fit tables, then questions, decisions and a timeline. From the Kathy Sun email of Fri 6 Nov 2026. Only when Daniel says 'full picture'."""
+    body = (p("This is a full picture sample. It shows every feature in one email, including the ask and the decisions.")
+            + ask_box(ask_rows("Reply with two choices: 1A or 1B for the home, and 2A or 2B for the renovation budget.",
+                               "Fri 13 Nov", "the shortlist for inspection.", "1A, 2A as a starting point."))
+            + since(["The pest report you sent on Wed 4 Nov flagged the roof timber only."])
+            + choice_card("Short answer", ul([
+                "<strong>Choose the smaller home first.</strong> Lower cost, lower upkeep, and closer to transport.",
+                "<strong>Renovate step by step.</strong> Start with the roof, then the bathroom, then the kitchen.",
+                "<strong>Defer the extension.</strong> Revisit it after one year in the home."]))
+            + h3("1. The two homes")
+            + table(["Home", "What it gives", "Fit"],
+                    [["A. 12 Mistry Ave, Macleod", "3 bed, 2 bath, fenced yard, 7 min to station", pill("BEST FIT", "PASS")],
+                     ["B. 4 Kimbundo St, Donvale", "4 bed, 2 bath, larger yard, 18 min to station", pill("PARTIAL", "PARTIAL")]], ["32%", "40%", "28%"])
+            + h3("2. Fit against your must have list")
+            + table(["You asked for", "Evidence", "Fit"],
+                    [["Within 10 min of a station", "Mistry Ave is a 7 min walk. Donvale is 18 min by bus.", pill("STRONG", "PASS")],
+                     ["Low upkeep", "Donvale roof is near end of life. Mistry Ave roof was done in 2021.", pill("PARTIAL", "PARTIAL")],
+                     ["Renovation list under 50k", "Quotes on file: roof 9k, bathroom 18k, kitchen 20k.", pill("NOT TESTED", "NOT TESTED")]], ["30%", "46%", "24%"])
+            + h3("3. The questions to answer")
+            + ul([options("Which renovation scope do you prefer?",
+                          ["Roof only in year one, then reassess.", "Roof plus bathroom in year one.", "Roof, bathroom and kitchen in year one."],
+                          default="If no reply, roof only."),
+                  "Which home would you like to inspect first? " + tag("Releases the shortlist")], ordered=True)
+            + h3("4. The decisions")
+            + choice_card("Decision 1: which home", ul([
+                "<strong>A.</strong> Mistry Ave, Macleod - closer to the station, lower upkeep.",
+                "<strong>B.</strong> Donvale, Kimbundo St - more rooms, longer commute."]))
+            + choice_card("Decision 2: renovation budget", ul([
+                "<strong>A.</strong> Up to 30k in year one - roof plus bathroom.",
+                "<strong>B.</strong> Up to 55k in year one - roof, bathroom and kitchen."]))
+            + suggestion("start with roof only, then add the bathroom after three months.")
+            + p("For example, 1A, 2A.", 8)
+            + copy_line("Decision 1: __ &nbsp; Decision 2: __")
+            + choice_card("The question to ask the agent", p('"Which part of the roof was done in 2021, and can we see the invoice?"', 0))
+            + h3("5. Timeline")
+            + table(["Date", "Steps"], [["Fri 13 Nov", "Reply with 1A or 1B, and 2A or 2B"], ["Mon 17 Nov", "Inspection and pest recheck"], ["Fri 21 Nov", "Offer or pause the shortlist"]], ["20%", "80%"]))
+    return "Client", "[FYI] Full picture sample: all features", wrap(body, "Hi Daniel,")
+
+ALL = [test_report, decision_request, client_update, question_list, short_reply, personal, full_picture]
 
 if __name__ == "__main__":
     from pathlib import Path
