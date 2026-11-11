@@ -2,7 +2,7 @@
 name: email-style
 description: Daniel's house email style, covering format and voice. Use whenever drafting, formatting, previewing or sending any email for Daniel (any project, any recipient), including replies, follow-ups, client updates, decision requests, test reports and personal emails. Covers tiers, structure, colours, ask box, decision cards, status pills, subject lines, dates, images, size limits and the send checks. Also covers full picture formatting, used only when Daniel says "full picture", "full picture formatting" or "full picture style", and telegraphic style, used only when Daniel says "telegraphic", "telegraphic style" or "telegram style".
 metadata:
-  version: "1.2"
+  version: "1.2.0"
   updated: "Fri 6 Nov 2026, full picture formatting section and options reference added"
   decided: "Thu 1 Oct 2026, four review rounds (visual record: https://claude.ai/artifact/X1RTrSGYsUgExr8wUZL8HY)"
 ---
